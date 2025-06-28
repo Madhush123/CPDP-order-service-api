@@ -2,7 +2,7 @@ package com.cleox.quickcart.order_service_api.service;
 
 import com.cleox.quickcart.order_service_api.dto.request.CustomerOrderRequestDto;
 import com.cleox.quickcart.order_service_api.dto.response.CustomerOrderResponseDto;
-import com.cleox.quickcart.order_service_api.dto.response.paginate.CustomerOrderPaginateDto;
+import com.cleox.quickcart.order_service_api.dto.response.paginate.CustomerOrderPaginateResponseDto;
 
 public interface CustomerOrderService {
     public void createOrder(CustomerOrderRequestDto requestDto);
@@ -11,5 +11,5 @@ public interface CustomerOrderService {
     public void manageStatus(String status,String orderId);
     public CustomerOrderResponseDto findOrderById(String orderId);
     public void deleteOrderById(String orderId);
-    public CustomerOrderPaginateDto searchAllOrders(String searchText,int page,int size);
+    public CustomerOrderPaginateResponseDto searchAllOrders(String searchText,int page,int size);
 }

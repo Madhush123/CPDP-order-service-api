@@ -4,7 +4,7 @@ import com.cleox.quickcart.order_service_api.dto.request.CustomerOrderRequestDto
 import com.cleox.quickcart.order_service_api.dto.request.OrderDetailRequestDto;
 import com.cleox.quickcart.order_service_api.dto.response.CustomerOrderResponseDto;
 import com.cleox.quickcart.order_service_api.dto.response.OrderDetailResponseDto;
-import com.cleox.quickcart.order_service_api.dto.response.paginate.CustomerOrderPaginateDto;
+import com.cleox.quickcart.order_service_api.dto.response.paginate.CustomerOrderPaginateResponseDto;
 import com.cleox.quickcart.order_service_api.entity.CustomerOrder;
 import com.cleox.quickcart.order_service_api.entity.OrderDetail;
 import com.cleox.quickcart.order_service_api.entity.OrderStatus;
@@ -84,8 +84,8 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
     }
 
     @Override
-    public CustomerOrderPaginateDto searchAllOrders(String searchText, int page, int size) {
-        return CustomerOrderPaginateDto.builder()
+    public CustomerOrderPaginateResponseDto searchAllOrders(String searchText, int page, int size) {
+        return CustomerOrderPaginateResponseDto.builder()
                 .count(
                         customerOrderRepo.searchCount(searchText)
                 )

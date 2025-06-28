@@ -10,7 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CustomerOrderPaginateDto {
+public class CustomerOrderPaginateResponseDto {
     private long count;
     private List<CustomerOrderResponseDto> orderList;
 }
