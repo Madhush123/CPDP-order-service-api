@@ -1,9 +1,6 @@
-package com.cleox.quickcart.order_service_api.dto.request;
+package com.cleox.quickcart.order_service_api.dto.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -12,7 +9,9 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderDetailRequestDto {
+@Builder
+public class OrderDetailResponseDto {
+    private String detailId;
     private String productId;
     private int qty;
     private BigDecimal unitPrice;

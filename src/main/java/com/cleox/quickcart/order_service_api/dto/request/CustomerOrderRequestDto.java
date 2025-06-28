@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -14,7 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class CustomerOrderRequestDto {
     private String userId;
-    private double totalAmount;
+    private BigDecimal totalAmount;
     private Date orderDate;
     private ArrayList<OrderDetailRequestDto> orderDetails;
 }

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.beans.BeanInfo;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,7 +27,7 @@ public class CustomerOrder {
     private String userId;
 
     @Column(name = "total_amount", nullable = false,precision = 10,scale = 2)
-    private double totalAmount;
+    private BigDecimal totalAmount;
 
     @Column(name = "remark", length = 750)
     private String remark;

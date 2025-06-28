@@ -3,6 +3,7 @@ package com.cleox.quickcart.order_service_api.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity(name="order_detail")
@@ -24,10 +25,10 @@ public class OrderDetail {
     private int qty;
 
     @Column(name = "unit_price", nullable = false,precision = 10,scale = 2)
-    private String unitPrice;
+    private BigDecimal unitPrice;
 
     @Column(name = "discount", precision = 10,scale = 2)
-    private Date discount;
+    private BigDecimal discount;
 
     @ManyToOne
     @JoinColumn(name="customer_order_id")
