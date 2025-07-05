@@ -14,8 +14,6 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CustomerOrderRequestDto {
-    private String userId;
-    private BigDecimal totalAmount;
-    private Date orderDate;
+    private double totalAmount;
     private ArrayList<OrderDetailRequestDto> orderDetails;
 }

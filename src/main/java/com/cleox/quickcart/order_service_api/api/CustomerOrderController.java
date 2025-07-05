@@ -3,6 +3,7 @@ package com.cleox.quickcart.order_service_api.api;
 import com.cleox.quickcart.order_service_api.dto.request.CustomerOrderRequestDto;
 import com.cleox.quickcart.order_service_api.service.CustomerOrderService;
 import com.cleox.quickcart.order_service_api.util.StandardResponseDto;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +12,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/v1/customer-orders")
 @RequiredArgsConstructor
+@Transactional
 public class CustomerOrderController {
 
     private final CustomerOrderService customerOrderService;
 
+@Transactional
     @PostMapping("/business/create-order")
     public ResponseEntity<StandardResponseDto> create(@RequestBody CustomerOrderRequestDto request) {
         customerOrderService.createOrder(request);

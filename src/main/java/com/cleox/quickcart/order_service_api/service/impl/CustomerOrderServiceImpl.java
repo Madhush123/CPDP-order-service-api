@@ -10,6 +10,7 @@ import com.cleox.quickcart.order_service_api.entity.OrderDetail;
 import com.cleox.quickcart.order_service_api.entity.OrderStatus;
 import com.cleox.quickcart.order_service_api.exception.EntryNotFoundException;
 import com.cleox.quickcart.order_service_api.repo.CustomerOrderRepo;
+import com.cleox.quickcart.order_service_api.repo.OrderDetailRepo;
 import com.cleox.quickcart.order_service_api.repo.OrderStatusRepo;
 import com.cleox.quickcart.order_service_api.service.CustomerOrderService;
 import lombok.RequiredArgsConstructor;
@@ -17,10 +18,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,29 +27,43 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
 
     private final CustomerOrderRepo customerOrderRepo;
     private final OrderStatusRepo orderStatusRepo;
+    private final OrderDetailRepo orderDetailRepo;
 
     @Override
     public void createOrder(CustomerOrderRequestDto requestDto) {
+        //You must use a real UserId
+        var userId="TempUserId";
+
+        var orderId=UUID.randomUUID().toString();
 
         CustomerOrder customerOrder = new CustomerOrder();
-        customerOrder.setOrderId(UUID.randomUUID().toString());
-        customerOrder.setOrderDate(requestDto.getOrderDate());
+        customerOrder.setOrderId(orderId);
+        customerOrder.setOrderDate(new Date());
         customerOrder.setRemark("");
         customerOrder.setTotalAmount(requestDto.getTotalAmount());
-        customerOrder.setUserId(requestDto.getUserId());
+        customerOrder.setUserId(userId);
 
         OrderStatus orderStatus = orderStatusRepo.findByStatus("PENDING").orElseThrow(() -> new RuntimeException("Order status not found"));
         customerOrder.setOrderStatus(orderStatus);
 
-        customerOrder.setOrderDetails(requestDto.getOrderDetails().stream().map(e -> createOrderDetail(e, customerOrder)).collect(Collectors.toSet()));
+        for(OrderDetailRequestDto t:requestDto.getOrderDetails()){
+
+          customerOrder.getOrderDetails().add(OrderDetail.builder()
+                  .qty(t.getQty())
+                  .productId(t.getProductId())
+                  .customerOrder(customerOrder)
+                  .discount(t.getDiscount())
+                  .unitPrice(t.getUnitPrice()).build());
+        }
 
         customerOrderRepo.save(customerOrder);
+
     }
 
     @Override
     public void updateOrder(CustomerOrderRequestDto requestDto, String orderId) {
         CustomerOrder customerOrder = customerOrderRepo.findById(orderId).orElseThrow(() -> new EntryNotFoundException(String.format("Order not found with %s", orderId)));
-        customerOrder.setOrderDate(requestDto.getOrderDate());
+        customerOrder.setOrderDate(new Date());
         customerOrder.setTotalAmount(requestDto.getTotalAmount());
         customerOrderRepo.save(customerOrder);
     }

@@ -20,14 +20,15 @@ import java.util.Set;
 public class CustomerOrder {
 
     @Id
+
     @Column(name = "order_id", nullable = false,unique = true,length = 80)
     private String orderId;
 
     @Column(name = "user_id", nullable = false,length = 80)
     private String userId;
 
-    @Column(name = "total_amount", nullable = false,precision = 10,scale = 2)
-    private BigDecimal totalAmount;
+    @Column(name = "total_amount", nullable = false)
+    private double totalAmount;
 
     @Column(name = "remark", length = 750)
     private String remark;
@@ -35,7 +36,7 @@ public class CustomerOrder {
     @Column(name = "order_date", nullable = false,columnDefinition = "DATETIME")
     private Date orderDate;
 
-    @OneToMany(mappedBy = "customerOrder")
+    @OneToMany(mappedBy = "customerOrder",cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<OrderDetail> orderDetails=new HashSet<>();
 
     @ManyToOne

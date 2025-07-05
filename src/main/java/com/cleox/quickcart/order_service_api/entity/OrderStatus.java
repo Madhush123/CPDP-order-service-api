@@ -1,10 +1,7 @@
 package com.cleox.quickcart.order_service_api.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -15,9 +12,11 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class OrderStatus {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "status_id", nullable = false,unique = true,length = 80)
     private String statusId;
 

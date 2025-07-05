@@ -15,6 +15,7 @@ import java.util.Date;
 public class OrderDetail {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "detail_id", nullable = false,unique = true,length = 80)
     private String detailId;
 
@@ -24,11 +25,11 @@ public class OrderDetail {
     @Column(name = "qty")
     private int qty;
 
-    @Column(name = "unit_price", nullable = false,precision = 10,scale = 2)
-    private BigDecimal unitPrice;
+    @Column(name = "unit_price", nullable = false)
+    private double unitPrice;
 
-    @Column(name = "discount", precision = 10,scale = 2)
-    private BigDecimal discount;
+    @Column(name = "discount")
+    private double discount;
 
     @ManyToOne
     @JoinColumn(name="customer_order_id")

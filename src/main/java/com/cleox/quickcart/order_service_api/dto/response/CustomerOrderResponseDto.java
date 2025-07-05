@@ -16,7 +16,7 @@ import java.util.List;
 public class CustomerOrderResponseDto {
     private String orderId;
     private String userId;
-    private BigDecimal totalAmount;
+    private double totalAmount;
     private Date orderDate;
     private String status;
     private String remark;

@@ -15,6 +15,6 @@ import java.util.Date;
 public class OrderDetailRequestDto {
     private String productId;
     private int qty;
-    private BigDecimal unitPrice;
-    private BigDecimal discount;
+    private double unitPrice;
+    private double discount;
 }
